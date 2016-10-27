@@ -31,7 +31,7 @@ This is used to avoid naked `bool`s as function parameters.
 Instead of declaration:
 
 ```c++
-void set_status(bool engineSstarted, bool crewReady);
+void set_status(bool engineStarted, bool crewReady);
 ```
 
 you can declare:
