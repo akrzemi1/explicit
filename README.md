@@ -31,7 +31,7 @@ This is used to avoid naked `bool`s as function parameters.
 Instead of declaration:
 
 ```c++
-bool status(bool engineSstarted, bool crewReady);
+void set_status(bool engineSstarted, bool crewReady);
 ```
 
 you can declare:
@@ -40,13 +40,13 @@ you can declare:
 using EngineStarted = tagged_bool<class EngineStartedTag>;
 using CrewReady = tagged_bool<class CrewReadyTag>;
 
-bool status(EngineStarted started, CrewReady ready);
+void set_status(EngineStarted started, CrewReady ready);
 ```
 
 and use it:
 
 ```
-fun(EngineStarted{true}, CrewReady{true});
+set_status(EngineStarted{true}, CrewReady{true});
 ```
 
 These types work with boolean expressions, and avoid common implicit convesion gotchas like a pointer being converted to `bool`.
