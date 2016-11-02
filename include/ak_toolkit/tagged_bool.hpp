@@ -4,10 +4,11 @@
 // License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
 
-#ifndef AK_TOOLKIT_TAGGED_BOOL_HEADER_GUARD_
-#define AK_TOOLKIT_TAGGED_BOOL_HEADER_GUARD_
+#ifndef AK_TOOLKIT_EXPLICIT_TAGGED_BOOL_HEADER_GUARD_
+#define AK_TOOLKIT_EXPLICIT_TAGGED_BOOL_HEADER_GUARD_
 
 namespace ak_toolkit {
+namespace xplicit {
 namespace tagged_bool_ns {
 
 template <typename Tag>
@@ -33,6 +34,7 @@ public:
 
 using tagged_bool_ns::tagged_bool;
 
+}
 }
 
 #endif
