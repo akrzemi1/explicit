@@ -6,7 +6,8 @@ A set of small tools that allow you to state your intentions more explicitly in 
 This small class template `out_param` can be used to indicate in the function's signature that a given reference parameter is an *output parameter*:
 
 ```c++
-using namespace ak_toolkit;
+#include <ak_toolbox/out_param.hpp>
+using namespace ak_toolkit::xplicit;
 
 void assign(out_param<std::string&> s, // < output parameter
             std::string const& v)
@@ -37,6 +38,9 @@ void set_status(bool engineStarted, bool crewReady);
 you can declare:
 
 ```c++
+#include <ak_toolbox/taged_bool.hpp>
+using namespace ak_toolkit::xplicit;
+
 using EngineStarted = tagged_bool<class EngineStartedTag>;
 using CrewReady = tagged_bool<class CrewReadyTag>;
 
@@ -51,6 +55,31 @@ set_status(EngineStarted{true}, CrewReady{true});
 
 These types work with boolean expressions, and avoid common implicit convesion gotchas like a pointer being converted to `bool`.
 
+## Tool `rvalue_ref`
+
+This allows the constructor parameters to bind to lvalues, but not to rvalues:
+
+```c++
+class Processor
+{
+  Big1 const& _big1;
+  Big2 const& _big2;
+  
+public:  
+  explicit Processor(lvalue_ref<const Big1> b1, lvalue_ref<const Big2> b2)
+    : _big1(b1), _big2(b2) {}
+};
+
+int main()
+{
+  const Big1 b1 {};
+  const Big2 b2 {};
+  Processor p {b1, b2};          // ok
+  Processor q {b1, Big2{}};      // error
+  Processor r {b1, std::ref(b2)} // ok
+}
+```
+
 ## installation
 It is a C++11 header-only library.
 
@@ -58,4 +87,4 @@ It is a C++11 header-only library.
 Distributed under the [Boost Software License, Version 1.0](http://www.boost.org/LICENSE_1_0.txt).
 
 ## Acknowledgements
-The idea of the generalized `only_when` was proposed by Vicente J. Botet Escriba.
+The idea of the generalized `only_when` was proposed by Vicente J. Botet Escriba. Tomasz Kamiński suggested the support for `std::reference_wrapper` in `rvalue_ref`.
