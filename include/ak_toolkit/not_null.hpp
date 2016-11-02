@@ -6,6 +6,7 @@
 #include <memory>
 
 namespace ak_toolkit {
+namespace xplicit {
 namespace not_null_ns {
 
 #define AK_TOOLKIT_RETURNS(...) noexcept(noexcept(__VA_ARGS__)) -> decltype(__VA_ARGS__) { return __VA_ARGS__; }
@@ -40,6 +41,7 @@ void as_not_null(::std::nullptr_t) = delete;
 using not_null_ns::not_null;
 using not_null_ns::as_not_null;
 
+}
 }
 
 #endif
