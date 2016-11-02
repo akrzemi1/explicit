@@ -1,10 +1,11 @@
-#ifndef AK_TOOLKIT_OUT_PARAM_HEADER_GUARD_
-#define AK_TOOLKIT_OUT_PARAM_HEADER_GUARD_
+#ifndef AK_TOOLKIT_XPLICIT_ONLY_WHEN_HEADER_GUARD_
+#define AK_TOOLKIT_XPLICIT_ONLY_WHEN_HEADER_GUARD_
 
 #include <type_traits>
 #include <utility>
 
 namespace ak_toolkit {
+namespace xplicit {
 namespace only_when_ns {
 
 #define AK_TOOLKIT_ENABLE_IF(...) typename ::std::enable_if<(__VA_ARGS__), bool>::type = true
@@ -42,6 +43,7 @@ using only_int = only_when<int, is_signed_integral>;
 template <typename T>
   using only_lvalue = only_when<T&, ::std::is_lvalue_reference>;
 
+}
 }
 
 #endif
