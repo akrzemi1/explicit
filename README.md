@@ -55,7 +55,7 @@ set_status(EngineStarted{true}, CrewReady{true});
 
 These types work with boolean expressions, and avoid common implicit convesion gotchas like a pointer being converted to `bool`.
 
-## Tool `rvalue_ref`
+## Tool `lvalue_ref`
 
 This allows the constructor parameters to bind to lvalues, but not to rvalues:
 
