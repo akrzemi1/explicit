@@ -38,7 +38,7 @@ void set_status(bool engineStarted, bool crewReady);
 you can declare:
 
 ```c++
-#include <ak_toolbox/taged_bool.hpp>
+#include <ak_toolbox/tagged_bool.hpp>
 using namespace ak_toolkit::xplicit;
 
 using EngineStarted = tagged_bool<class EngineStartedTag>;
