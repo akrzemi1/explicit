@@ -34,9 +34,9 @@ void static_test_proxy_ref()
 {
   static_assert(std::is_convertible<ProxyReference&, lvalue_ref<int>>::value, "test failure");
   static_assert(std::is_convertible<ProxyReference const&, lvalue_ref<const int>>::value, "test failure");
-  static_assert(!std::is_convertible<ProxyReference, lvalue_ref<int>>::value, "test failure");
-  static_assert(!std::is_convertible<ProxyReference, lvalue_ref<const int>>::value, "test failure");
-  static_assert(!std::is_convertible<ProxyReference const, lvalue_ref<const int>>::value, "test failure");
+  static_assert(!std::is_convertible<ProxyReference&&, lvalue_ref<int>>::value, "test failure");
+  static_assert(!std::is_convertible<ProxyReference&&, lvalue_ref<const int>>::value, "test failure");
+  static_assert(!std::is_convertible<ProxyReference const&&, lvalue_ref<const int>>::value, "test failure");
 }
 # endif
 
