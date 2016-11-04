@@ -18,45 +18,6 @@ namespace ak_toolkit {
 namespace xplicit {
 namespace lvalue_ns {
 
-# if (defined __GNUC__) && (!defined __clang__) && (__GNUC__ < 4 || __GNUC__ == 4 && __GNUC_MINOR__ <= 7)
-
-template <typename T, typename U>
-struct is_reference_compatible : ::std::conditional<
-  ::std::is_base_of<typename ::std::remove_cv<T>::type, typename ::std::remove_cv<U>::type>::value
-  && ::std::is_convertible<U&, T&>::value,
-  ::std::true_type,
-  ::std::false_type
->::type {};
-  
-# else
-  
-template <typename T, typename U>
-using is_reference_compatible = typename ::std::conditional<
-  ::std::is_base_of<typename ::std::remove_cv<T>::type, typename ::std::remove_cv<U>::type>::value
-  && ::std::is_convertible<U&, T&>::value,
-  ::std::true_type,
-  ::std::false_type
->::type;
- 
-# endif
-
-template<typename T, typename U>
-struct is_reference_wrapper_for : ::std::conditional<
-    ::std::is_same<typename ::std::decay<U>::type, U>::value,
-    std::false_type, 
-    is_reference_wrapper_for<T, typename ::std::decay<U>::type>
-  >::type
-{};
-
-template<typename T, typename U>
-struct is_reference_wrapper_for<T, std::reference_wrapper<U>> : is_reference_compatible<T, U> {};
-
-#if defined AK_TOOLKIT_USING_BOOST
-template<typename T, typename U>
-struct is_reference_wrapper_for<T, boost::reference_wrapper<U>> : is_reference_compatible<T, U> {};
-#endif
-  
-
 template <typename T, typename U>
 struct is_lvalue_ref_or_wrapper : ::std::conditional<
   ::std::is_convertible<U&&, T&>::value && !::std::is_convertible<U&&, T&&>::value,
