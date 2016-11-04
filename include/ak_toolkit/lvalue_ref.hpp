@@ -56,10 +56,6 @@ template<typename T, typename U>
 struct is_reference_wrapper_for<T, boost::reference_wrapper<U>> : is_reference_compatible<T, U> {};
 #endif
   
-  std::conjuction<
-  std::is_converbile<U&&, T&>,
-  std::negation<std::is_converbile<U&&, T&&>>
->
 
 template <typename T, typename U>
 struct is_lvalue_ref_or_wrapper : ::std::conditional<
