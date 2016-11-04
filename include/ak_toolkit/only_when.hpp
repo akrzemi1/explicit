@@ -51,7 +51,7 @@ using is_signed_integral = typename ::std::conditional<
 using only_when_ns::only_when;           // this prevents inadvertent ADL
 using only_when_ns::is_signed_integral;  //
 
-using only_int = only_when<int, is_signed_integral>;
+typedef only_when<int, is_signed_integral> only_int;
 
 # if (defined __GNUC__) && (!defined __clang__) && (__GNUC__ < 4 || __GNUC__ == 4 && __GNUC_MINOR__ <= 7)
 
