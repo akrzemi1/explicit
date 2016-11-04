@@ -59,7 +59,7 @@ struct is_reference_wrapper_for<T, boost::reference_wrapper<U>> : is_reference_c
 
 template <typename T, typename U>
 struct is_lvalue_ref_or_wrapper : ::std::conditional<
-  ::std::is_converbile<U&&, T&>::value && !::std::is_converbile<U&&, T&&>::value,
+  ::std::is_convertible<U&&, T&>::value && !::std::is_convertible<U&&, T&&>::value,
   ::std::true_type,
   ::std::false_type
 >::type {};
