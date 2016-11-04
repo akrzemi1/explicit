@@ -26,7 +26,7 @@ struct is_reference_compatible : ::std::conditional<
   && ::std::is_convertible<U&, T&>::value,
   ::std::true_type,
   ::std::false_type
->::type;
+>::type {};
   
 # else
   
