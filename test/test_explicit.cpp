@@ -28,6 +28,7 @@ struct ProxyReference
   int i;
   operator int&() & { return i; }
   operator const int&() const & { return i; }
+  operator const int&() const && = delete;
 };
 
 void static_test_proxy_ref()
