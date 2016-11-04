@@ -1,4 +1,4 @@
-# explicit
+# explicit [![Build Status](https://travis-ci.org/akrzemi1/explicit.svg?branch=master)](https://travis-ci.org/akrzemi1/explicit)
 A set of small tools that allow you to state your intentions more explicitly in the code
 
 ## Tool `out_param`
