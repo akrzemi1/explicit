@@ -1,5 +1,6 @@
 #include "ak_toolkit/lvalue_ref.hpp"
 #include "ak_toolkit/only_when.hpp"
+#include <string>
 
 using namespace ak_toolkit::xplicit;
 
