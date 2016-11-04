@@ -17,11 +17,17 @@ struct Processor
   bool process() { return _big1.data == _big2.data; } // this triggers UB on dangling references
 };
 
+# if (defined __GNUC__) && (!defined __clang__) && (__GNUC__ < 4 || __GNUC__ == 4 && __GNUC_MINOR__ < 8 || __GNUC__ == 4 && __GNUC_MINOR__ == 8 && __GNUC_PATCHLEVEL__ < 1)
+
+void static_test_proxy_ref(){}
+
+# else 
+
 struct ProxyReference
 {
   int i;
   operator int&() & { return i; }
-  operator const int&() const &{ return i; }
+  operator const int&() const & { return i; }
 };
 
 void static_test_proxy_ref()
@@ -32,6 +38,7 @@ void static_test_proxy_ref()
   static_assert(!std::is_convertible<ProxyReference, lvalue_ref<const int>>::value, "test failure");
   static_assert(!std::is_convertible<ProxyReference const, lvalue_ref<const int>>::value, "test failure");
 }
+# endif
 
 void static_lvalue_ref_conversions_succeed()
 {
