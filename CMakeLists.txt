@@ -2,7 +2,7 @@ project(explicit)
 cmake_minimum_required(VERSION 2.6)
 enable_testing()
 
-set(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra")
+set(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra ")
 
 add_executable(test_explicit test/test_explicit.cpp)
 
