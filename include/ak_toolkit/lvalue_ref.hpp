@@ -73,7 +73,7 @@ class lvalue_ref
 public:  
   
   template <typename U, typename ::std::enable_if<is_lvalue_ref_or_wrapper<T, U>::value, bool>::type = true>
-    lvalue_ref(U&& ref) : _ref(::std::forward<U>(ref) {}
+    lvalue_ref(U&& ref) : _ref(::std::forward<U>(ref)) {}
                                
   template <typename U, typename ::std::enable_if<!is_lvalue_ref_or_wrapper<T, U>::value, bool>::type = true>
     lvalue_ref(U&& ref) = delete;
