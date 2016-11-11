@@ -10,6 +10,7 @@
 #include <type_traits>
 
 namespace ak_toolkit {
+namespace xplicit {
 namespace out_param_ns {
 
   template <typename T>
@@ -35,6 +36,7 @@ namespace out_param_ns {
 using out_param_ns::out_param; // this prevents inadvertent ADL
 using out_param_ns::out;
 
+}
 }
 
 #endif
