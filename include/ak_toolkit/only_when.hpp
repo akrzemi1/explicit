@@ -67,7 +67,7 @@ struct int_no_double_test
 # if defined __GNUC__ && ! defined __clang__
 #   if (__GNUC__ < 4 || __GNUC__ == 4 && __GNUC_MINOR__ < 7)
 template <typename I, typename T>
-struct is_int_convertible_but_no_float : ::std::conditional<::std::is_convertible<T, I>::value
+struct is_int_convertible_but_no_float : ::std::conditional< ::std::is_convertible<T, I>::value
                                                             && ::std::is_constructible<detail::int_no_double_test<I>, T>::value,
   ::std::true_type, ::std::false_type>::type {}  ;
 #   else
