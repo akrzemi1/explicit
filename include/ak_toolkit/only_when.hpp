@@ -19,7 +19,7 @@ public:
   template <typename U, AK_TOOLKIT_ENABLE_IF(TypePred<T, U>::value)>  
     only_when (U&& v) : _val(::std::forward<U>(v)) {} 
 
-  template <typename I, AK_TOOLKIT_ENABLE_IF(!TypePred<T, U>::value)>
+  template <typename U, AK_TOOLKIT_ENABLE_IF(!TypePred<T, U>::value)>
     only_when (U&&) = delete;
     
   T get() const { return _val; }
