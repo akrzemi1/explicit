@@ -1,4 +1,4 @@
-## `only_when`
+# `only_when`
 
 A tool for defining a type akin to `T`, but which disables certain unwanted conversions to `T`. 
 
@@ -32,7 +32,7 @@ process(s); // error
 ```
 
 
-# Alias `only_int`
+## Alias `only_int`
 
 This is an alias for `only_when<int, is_int_convertible_but_no_float>`. You can use it in function declarations to bind to `int` or poxies to `int` but not to `double`:
 
