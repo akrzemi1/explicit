@@ -30,7 +30,7 @@ public:
 
 # if (defined __GNUC__) && (!defined __clang__) && (__GNUC__ < 4 || __GNUC__ == 4 && __GNUC_MINOR__ <= 7)
 
-template <template, typename T>
+template <typename, typename T>
 struct is_signed_integral : ::std::conditional<
   ::std::is_signed<T>::value && ::std::is_integral<T>::value,
   ::std::true_type,
@@ -38,7 +38,7 @@ struct is_signed_integral : ::std::conditional<
   
 # else
   
-template <template, typename T>
+template <typename, typename T>
 using is_signed_integral = typename ::std::conditional<
   ::std::is_signed<T>::value && ::std::is_integral<T>::value,
   ::std::true_type,
