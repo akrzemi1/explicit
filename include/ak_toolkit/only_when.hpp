@@ -83,7 +83,7 @@ using only_when_ns::only_when;                       // this prevents inadverten
 using only_when_ns::is_signed_integral;              //
 using only_when_ns::is_int_convertible_but_no_float; //
 
-typedef only_when<int, is_int_convertible_but_no_float> only_int;
+typedef only_when<int, is_signed_integral> only_int;
 
 # if (defined __GNUC__) && (!defined __clang__) && (__GNUC__ < 4 || __GNUC__ == 4 && __GNUC_MINOR__ <= 7)
 
