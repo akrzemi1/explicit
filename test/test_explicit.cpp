@@ -69,7 +69,37 @@ void test_lvalue_ref()
   demonstrate_lvalue_ref();
 }
 
+struct SuperInt
+{
+  operator int () const { return 1; }
+};
+
+struct SuperDouble
+{
+  operator double () const { return 1.5; }
+};
+
+struct NoConv {};
+
+
+struct Rational
+{
+  int numerator, denominator;
+  Rational(only_int num, only_int den = 0) : numerator(num.get()), denominator(den.get()) {}
+};
+
+void static_test_only_int_convertible()
+{
+  static_assert(std::is_constructible<Rational, int>::value, "failed only_int");
+}
+
+void test_only_int()
+{
+  static_test_only_int_convertible();
+}
+
 int main()
 {
   test_lvalue_ref();
+  test_only_int();
 }
