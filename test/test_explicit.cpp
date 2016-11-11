@@ -1,5 +1,6 @@
 #include "ak_toolkit/lvalue_ref.hpp"
 #include "ak_toolkit/only_when.hpp"
+#include "ak_toolkit/tagged_bool.hpp"
 #include <string>
 
 using namespace ak_toolkit::xplicit;
@@ -107,8 +108,50 @@ void test_only_int()
   static_test_only_int_convertible();
 }
 
+typedef tagged_bool<class BoolA_tag> BoolA;
+typedef tagged_bool<class BoolB_tag> BoolB;
+
+void static_testtaged_bool_convertability()
+{
+  static_assert(!std::is_convertible<bool, BoolA>::value, "failed taged_bool");
+  static_assert(!std::is_convertible<BoolA, bool>::value, "failed taged_bool");
+  static_assert( std::is_convertible<BoolA, BoolA>::value, "failed taged_bool");
+  
+  static_assert( std::is_constructible<bool, BoolA>::value, "failed taged_bool");
+  
+  static_assert( std::is_constructible<BoolA, bool>::value, "failed taged_bool");
+  static_assert( std::is_constructible<BoolA, BoolA>::value, "failed taged_bool");
+  static_assert(!std::is_constructible<BoolA, BoolB>::value, "failed taged_bool");
+  static_assert(!std::is_constructible<BoolA, int>::value, "failed taged_bool");
+  static_assert(!std::is_constructible<BoolA, void*>::value, "failed taged_bool");
+  static_assert(!std::is_constructible<BoolA, std::nullptr_t>::value, "failed taged_bool");
+  static_assert(!std::is_constructible<BoolA, double>::value, "failed taged_bool");
+}
+
+void demonstrate_tagged_bool()
+{
+  BoolA a {true};
+  BoolB b {false};
+  
+  assert (a && !b);
+  assert (a);
+  assert (!b);
+  assert (a == a);
+  assert (!b == !b);
+  assert (a || b);
+  if (a) assert (true);
+  else   assert (false);  
+}
+
+void test_tagged_bool()
+{
+  static_testtaged_bool_convertability();
+  demonstrate_tagged_bool();
+}
+
 int main()
 {
   test_lvalue_ref();
   test_only_int();
+  test_taged_bool();
 }
