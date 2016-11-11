@@ -154,5 +154,5 @@ int main()
 {
   test_lvalue_ref();
   test_only_int();
-  test_taged_bool();
+  test_tagged_bool();
 }
