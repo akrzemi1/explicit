@@ -96,7 +96,7 @@ struct is_lvalue_ref_or_wrapper_ : ::std::conditional<
 using only_when_ns::only_when;                       // this prevents inadvertent ADL
 using only_when_ns::is_signed_integral;              //
 using only_when_ns::is_int_convertible_but_no_float; //
-using only_when_ns::is_lvalue_ref_or_wrapper_;        //
+using only_when_ns::is_lvalue_ref_or_wrapper_;       //
 
 typedef only_when<int, is_int_convertible_but_no_float> only_int;
 
