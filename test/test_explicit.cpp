@@ -1,6 +1,8 @@
 #include "ak_toolkit/lvalue_ref.hpp"
 #include "ak_toolkit/only_when.hpp"
 #include "ak_toolkit/tagged_bool.hpp"
+#include "ak_toolkit/not_null.hpp"
+#include "ak_toolkit/out_param.hpp"
 #include <string>
 #include <cassert>
 
@@ -193,6 +195,19 @@ void test_not_null()
   test_not_null_unique_ptr();
 }
 
+// -------------
+
+void assin(out_param<std::string&> obj, std::string const& value)
+{
+  obj.get() = value;
+}
+
+void test_out_param()
+{
+  std::string s;
+  assign(out(s), "value");
+  assert (s == "value")
+}
 
 int main()
 {
@@ -200,4 +215,5 @@ int main()
   test_only_when();
   test_tagged_bool();
   test_not_null();
+  test_out_param();
 }
