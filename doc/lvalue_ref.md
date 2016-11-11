@@ -1,6 +1,6 @@
 # `lvalue_ref`
 
-This allows the constructor parameters to bind to lvalues, but not to rvalues:
+This is an alternative to `const T&`. It allows the constructor parameters to bind to lvalues to `const` objects, but prevents accidental bindin to temporaries:
 
 ```c++
 #include <ak_toolbox/lvalue_ref.hpp>
