@@ -61,25 +61,18 @@ For more, [see here](doc/only_when.md).
 This allows the constructor parameters to bind to lvalues, but not to rvalues:
 
 ```c++
-class Processor
+struct Processor
 {
-  Big1 const& _big1;
-  Big2 const& _big2;
-  
-public:  
-  explicit Processor(lvalue_ref<const Big1> b1, lvalue_ref<const Big2> b2)
-    : _big1(b1), _big2(b2) {}
+  Big const& _big;
+  explicit Processor(lvalue_ref<const Big> b) : _big(b) {}
 };
 
-int main()
-{
-  const Big1 b1 {};
-  const Big2 b2 {};
-  Processor p {b1, b2};          // ok
-  Processor q {b1, Big2{}};      // error
-  Processor r {b1, std::ref(b2)} // ok
-}
+const Big b {};
+Processor p {b}; // ok
+Processor p {Big{}}; // error (temporary)
 ```
+
+For more, [see here](doc/lvalue_ref.md).
 
 ## installation
 It is a C++11 header-only library.
