@@ -2,6 +2,7 @@
 #include "ak_toolkit/only_when.hpp"
 #include "ak_toolkit/tagged_bool.hpp"
 #include <string>
+#include <cassert>
 
 using namespace ak_toolkit::xplicit;
 
