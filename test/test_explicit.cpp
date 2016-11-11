@@ -197,7 +197,7 @@ void test_not_null()
 
 // -------------
 
-void assin(out_param<std::string&> obj, std::string const& value)
+void assign(out_param<std::string&> obj, std::string const& value)
 {
   obj.get() = value;
 }
