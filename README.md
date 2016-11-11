@@ -33,8 +33,8 @@ An alternative to type `bool` in function arguments. It allows to associate a na
 you can declare:
 
 ```c++
-using EngineStarted = tagged_bool<class EngineStartedTag>;
-using CrewReady = tagged_bool<class CrewReadyTag>;
+using EngineStarted = tagged_bool<class EngineStartedTag>; // one boolean type
+using CrewReady     = tagged_bool<class CrewReadyTag>;     // another boolean type
 
 void set_status(EngineStarted started, CrewReady ready); // function declaration
 set_status(EngineStarted{true}, CrewReady{true});        // function invokation
