@@ -104,9 +104,35 @@ void static_test_only_int_convertible()
   static_assert(!std::is_constructible<Rational, unsigned>::value, "failed only_int");
 }
 
-void test_only_int()
+struct filesystem_path
+{
+  filesystem_path(std::string const&) {}
+};
+
+template <typename, typename S>
+struct is_a_non_string : std::conditional<
+  std::is_convertible<S, std::string>::value,
+  std::false_type, std::true_type>::type
+{};
+
+void static_test_only_when_convertible()
+{
+  typedef only_when<filesystem_path, is_a_non_string> only_path;
+  
+  static_assert(std::is_convertible<filesystem_path, only_path>::value, "test failure");
+  static_assert(!std::is_convertible<std::string, only_path>::value, "test failure");
+  static_assert(!std::is_convertible<const char*, only_path>::value, "test failure");
+  
+  static_assert(std::is_constructible<filesystem_path, std::string>::value, "test failure");
+  static_assert(std::is_constructible<filesystem_path, const char *>::value, "test failure");
+  static_assert(!std::is_constructible<only_path, std::string>::value, "test failure");
+  static_assert(!std::is_constructible<only_path, const char *>::value, "test failure");
+}
+
+void test_only_when()
 {
   static_test_only_int_convertible();
+  static_test_only_when_convertible();
 }
 
 typedef tagged_bool<class BoolA_tag> BoolA;
@@ -153,6 +179,6 @@ void test_tagged_bool()
 int main()
 {
   test_lvalue_ref();
-  test_only_int();
+  test_only_when();
   test_tagged_bool();
 }
