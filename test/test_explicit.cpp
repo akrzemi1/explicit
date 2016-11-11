@@ -206,7 +206,7 @@ void test_out_param()
 {
   std::string s;
   assign(out(s), "value");
-  assert (s == "value")
+  assert (s == "value");
 }
 
 int main()
