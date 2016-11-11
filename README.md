@@ -79,7 +79,7 @@ For more, [see here](doc/lvalue_ref.md).
 This allows to indicate in function interface that a passed pointer is assumed never to be null:
 
 ```c++
-void process(not_null<T*> p); // function declaration
+void process(not_null<i*> p); // function declaration
 int i = 0;
 process(&i);                  // error: no implicit conversion to not_null
 process(as_not_null(&i));     // ok: explicit adjustment
