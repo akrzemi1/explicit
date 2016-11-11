@@ -9,6 +9,9 @@ But `filesystem::path` converst from `std::string`, and you do not want your fun
 You need to define a type trait, which says when a given type is a string:
 
 ```c++
+#include <ak_toolbox/only_when.hpp>
+using ak_toolkit::xplicit::only_when;
+
 template <typename, typename S>
   using is_a_non_string = std::negation<std::is_convertible<S, std::string>>;
 ```
@@ -37,6 +40,9 @@ process(s); // error
 This is an alias for `only_when<int, is_int_convertible_but_no_float>`. You can use it in function declarations to bind to `int` or poxies to `int` but not to `double`:
 
 ```c++
+#include <ak_toolbox/only_when.hpp>
+using ak_toolkit::xplicit::only_int;
+
 struct FixedPoint
 {
   // ...
