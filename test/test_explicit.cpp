@@ -176,9 +176,28 @@ void test_tagged_bool()
   demonstrate_tagged_bool();
 }
 
+// -----
+int read_value(not_null<std::unique_ptr<int>> p)
+{
+    return *p;
+}
+
+void test_not_null_unique_ptr()
+{
+    int ans = read_value(as_not_null(std::unique_ptr<int>{new int{2}}));
+    assert (2 == ans);
+}
+
+void test_not_null()
+{
+  test_not_null_unique_ptr();
+}
+
+
 int main()
 {
   test_lvalue_ref();
   test_only_when();
   test_tagged_bool();
+  test_not_null();
 }
