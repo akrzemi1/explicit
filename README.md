@@ -31,6 +31,19 @@ set_status(EngineStarted{true}, CrewReady{true});        // function invokation
 ```
 For more, [see here](doc/tagged_bool.md).
 
+## Tool `only_when`
+
+A tool for disabling some unwanted implicit conversions to types present in your function sinatures. For instance, you may want your function to take a `filesystem::path` but not allow an implicit conversion from `std::string`:
+
+```c++
+using only_path = only_when<filesystem::path, is_a_non_string>; // you define type trait is_a_non_string
+void process(only_path p);  // function declaration
+process(path);    // ok
+process(string);  // error
+```
+
+For more, [see here](doc/only_when.md).
+
 ## Tool `only_int`
 
 An alternative to type `int` in function arguments. It binds to `int`s and int proxies but not to `double`:
