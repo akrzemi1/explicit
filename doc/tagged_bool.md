@@ -21,7 +21,7 @@ run(vec.data(), vec.size()); // a pointer and an int
 run(-99.99, +99.99);
 ```
 
-Usin `tagged_bool` avoids all these problems. It allows you to easily build your unique `bool`-like types
+Using `tagged_bool` avoids all these problems. It allows you to easily build your unique `bool`-like types
 
 ```c++
 #include <ak_toolbox/tagged_bool.hpp>
