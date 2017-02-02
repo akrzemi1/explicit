@@ -38,9 +38,12 @@ an `int` or a `double` or a pointer:
 ```c++
 EngineStarted es1 = true;       // error
 EngineStarted es2 {vec.data()}; // error
-EngineStarted es {true};        // ok
-CrewReady     cr {false};       // ok
+EngineStarted es  {true};       // ok
+CrewReady     cr  {false};      // ok
 bool ans = cr && !es;           // ok
+
+CrewReady     cr2 {es}          // ok    (explicit conversion)
+CrewReady     cr3 = es;         // error (implicit conversion)
 ```
 
 Types `EngineStartedTag` and `CrewReadyTag` guarantee that different instantiations of `tagged_bool` render different types.
