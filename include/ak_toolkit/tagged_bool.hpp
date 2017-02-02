@@ -16,6 +16,9 @@ class tagged_bool
 {
     bool value;
     
+    template <typename /*OtherTag*/>
+        friend class tagged_bool;
+    
 public:
   
     constexpr explicit tagged_bool (bool v) : value {v} {}
@@ -23,6 +26,9 @@ public:
     constexpr explicit tagged_bool (int) = delete;
     constexpr explicit tagged_bool (double) = delete;
     constexpr explicit tagged_bool (void*) = delete;
+    
+    template <typename OtherTag>
+        constexpr explicit tagged_bool (tagged_bool<OtherTag> b) : value {b.value} {}
     
     constexpr explicit operator bool() const { return value; }
     
