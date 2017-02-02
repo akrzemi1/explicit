@@ -49,7 +49,7 @@ CrewReady     cr3 = es;         // error (implicit conversion)
 Types `EngineStartedTag` and `CrewReadyTag` guarantee that different instantiations of `tagged_bool` render different types.
 These tags do not have to be complete types.
 
-You declare anfd use these bool-types as follows:
+You declare and use these bool-types as follows:
 
 ```c++
 void set_status(EngineStarted started, CrewReady ready); // function declaration
