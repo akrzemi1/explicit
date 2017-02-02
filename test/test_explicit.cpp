@@ -140,17 +140,18 @@ void test_only_when()
 typedef tagged_bool<class BoolA_tag> BoolA;
 typedef tagged_bool<class BoolB_tag> BoolB;
 
-void static_testtaged_bool_convertability()
+void static_test_taged_bool_convertability()
 {
   static_assert(!std::is_convertible<bool, BoolA>::value, "failed taged_bool");
   static_assert(!std::is_convertible<BoolA, bool>::value, "failed taged_bool");
+  static_assert(!std::is_convertible<BoolA, BoolB>::value, "failed taged_bool");
   static_assert( std::is_convertible<BoolA, BoolA>::value, "failed taged_bool");
   
   static_assert( std::is_constructible<bool, BoolA>::value, "failed taged_bool");
   
   static_assert( std::is_constructible<BoolA, bool>::value, "failed taged_bool");
   static_assert( std::is_constructible<BoolA, BoolA>::value, "failed taged_bool");
-  static_assert(!std::is_constructible<BoolA, BoolB>::value, "failed taged_bool");
+  static_assert( std::is_constructible<BoolA, BoolB>::value, "failed taged_bool");
   static_assert(!std::is_constructible<BoolA, int>::value, "failed taged_bool");
   static_assert(!std::is_constructible<BoolA, void*>::value, "failed taged_bool");
   static_assert(!std::is_constructible<BoolA, std::nullptr_t>::value, "failed taged_bool");
@@ -168,13 +169,20 @@ void demonstrate_tagged_bool()
   assert (a == a);
   assert (!b == !b);
   assert (a || b);
+  
   if (a) assert (true);
-  else   assert (false);  
+  else   assert (false); 
+
+  BoolB ba {a};
+  assert (ba);
+  assert (ba && a);
+  assert (ba == BoolB{a});
+  assert (ba != b); 
 }
 
 void test_tagged_bool()
 {
-  static_testtaged_bool_convertability();
+  static_test_taged_bool_convertability();
   demonstrate_tagged_bool();
 }
 
