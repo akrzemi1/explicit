@@ -9,7 +9,7 @@
 
 namespace ak_toolkit {
 namespace xplicit {
-namespace tagged_bool_ns {
+namespace tagged_bool_ns { // artificial namespace to prevent ADL into namespace xplicit
 
 template <typename Tag>
 class tagged_bool
@@ -38,7 +38,7 @@ public:
 
 }
 
-using tagged_bool_ns::tagged_bool;
+using tagged_bool_ns::tagged_bool; // with this tagged_bool is in namespace xplicit but with disabled ADL
 
 }
 }
