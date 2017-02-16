@@ -33,7 +33,23 @@ std::string s {"file.txt"};
 process(p); // ok
 process(s); // error
 ```
+In a similar manner, you can use it to declare a function that takes by referece objects of class `X` but not of class derived from `X`:
 
+```
+template <typename T, typename U>
+using is_not_aliased_t = 
+  std::is_same<std::decay_t<U>, std::decay_t<T>>;
+
+template <typename T>
+using nonaliased = only_when<T, is_not_aliased_t>;
+
+struct X {} x;
+srtuct Y : X {} y;
+
+void fun(nonaliased<const X&> x);
+fun(x); // ok
+fun(y); // error
+```
 
 ## Alias `only_int`
 
