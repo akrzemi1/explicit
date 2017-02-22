@@ -160,24 +160,28 @@ void static_test_taged_bool_convertability()
 
 void demonstrate_tagged_bool()
 {
-  BoolA a {true};
-  BoolB b {false};
+  constexpr BoolA a {true};
+  constexpr BoolB b {false};
   
-  assert (a && !b);
-  assert (a);
-  assert (!b);
-  assert (a == a);
-  assert (!b == !b);
-  assert (a || b);
+  static_assert (a && !b, "failed tagged_bool");
+  static_assert (a, "failed tagged_bool");
+  static_assert (!b, "failed tagged_bool");
+  static_assert (a == a, "failed tagged_bool");
+  static_assert ((!b) == !b, "failed tagged_bool");
+  static_assert (a || b, "failed tagged_bool");
   
   if (a) assert (true);
   else   assert (false); 
 
-  BoolB ba {a};
-  assert (ba);
-  assert (ba && a);
-  assert (ba == BoolB{a});
-  assert (ba != b); 
+  constexpr BoolB ba {a};
+  static_assert (ba, "failed tagged_bool");
+  static_assert (ba && a, "failed tagged_bool");
+  static_assert (ba == BoolB{a}, "failed tagged_bool");
+  static_assert (ba != b, "failed tagged_bool"); 
+    
+  constexpr BoolA a1 {false};
+  constexpr BoolA a2 = !a1;
+  static_assert (a2, "failed tagged_bool");
 }
 
 void test_tagged_bool()
