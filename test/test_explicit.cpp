@@ -164,7 +164,7 @@ void demonstrate_tagged_bool()
   constexpr BoolB b {false};
   
   static_assert (a && !b, "failed tagged_bool");
-  static_assert (a, "failed tagged_bool");
+  assert (a);
   static_assert (!b, "failed tagged_bool");
   static_assert (a == a, "failed tagged_bool");
   static_assert ((!b) == !b, "failed tagged_bool");
@@ -174,14 +174,14 @@ void demonstrate_tagged_bool()
   else   assert (false); 
 
   constexpr BoolB ba {a};
-  static_assert (ba, "failed tagged_bool");
+  assert (ba);
   static_assert (ba && a, "failed tagged_bool");
   static_assert (ba == BoolB{a}, "failed tagged_bool");
   static_assert (ba != b, "failed tagged_bool"); 
     
   constexpr BoolA a1 {false};
   constexpr BoolA a2 = !a1;
-  static_assert (a2, "failed tagged_bool");
+  assert (a2);
 }
 
 void test_tagged_bool()
