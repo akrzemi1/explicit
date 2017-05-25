@@ -47,8 +47,8 @@ using tagged_bool_ns::tagged_bool; // with this tagged_bool is in namespace xpli
 // A helper macro to reduce boiler plate when creating tagged bools, e.g.,
 //   AKT_MAKE_TAGGED_BOOL( is_ready );
 //   AKT_MAKE_TAGGED_BOOL( has_signaled );
-#define AKT_MAKE_TAGGED_BOOL( Name ) \
-    class Name##ExplicitBoolTag {};  \
+#define AKT_MAKE_TAGGED_BOOL( Name )                                   \
+    class Name##ExplicitBoolTag { Name##ExplicitBoolTag() = delete; }; \
     using Name = ::ak_toolkit::xplicit::tagged_bool< Name##ExplicitBoolTag >
 
 #endif
