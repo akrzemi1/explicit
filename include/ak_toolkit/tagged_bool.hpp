@@ -34,7 +34,12 @@ public:
     constexpr tagged_bool operator!() const { return tagged_bool{!value}; }
     
     friend constexpr bool operator==(tagged_bool l, tagged_bool r) { return l.value == r.value; }
+    friend constexpr bool operator==(tagged_bool l, bool r) { return l.value == r; }
+    friend constexpr bool operator==(bool l, tagged_bool r) { return l == r.value; }
+
     friend constexpr bool operator!=(tagged_bool l, tagged_bool r) { return l.value != r.value; }
+    friend constexpr bool operator!=(tagged_bool l, bool r) { return l.value != r; }
+    friend constexpr bool operator!=(bool l, tagged_bool r) { return l != r.value; }
 };
 
 }
