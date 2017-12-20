@@ -33,7 +33,7 @@ For more, [see here](doc/tagged_bool.md).
 
 ## Tool `only_when`
 
-A tool for disabling some unwanted implicit conversions to types present in your function sinatures. For instance, you may want your function to take a `filesystem::path` but not allow an implicit conversion from `std::string`:
+A tool for disabling some unwanted implicit conversions to types present in your function signatures. For instance, you may want your function to take a `filesystem::path` but not allow an implicit conversion from `std::string`:
 
 ```c++
 using only_path = only_when<filesystem::path, is_a_non_string>; // you define type trait is_a_non_string
