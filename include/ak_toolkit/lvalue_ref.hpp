@@ -34,10 +34,10 @@ class lvalue_ref
 public:  
   
   template <typename U, typename ::std::enable_if<is_lvalue_ref_or_wrapper<T, U>::value, bool>::type = true>
-    lvalue_ref(U&& ref) : _ref(::std::forward<U>(ref)) {}
+    lvalue_ref(U&& ref) : _ref(::std::forward<U>(ref)) {}  // NOLINT(bugprone-forwarding-reference-overload)
                                
   template <typename U, typename ::std::enable_if<!is_lvalue_ref_or_wrapper<T, U>::value, bool>::type = true>
-    lvalue_ref(U&& ref) = delete;
+    lvalue_ref(U&& ref) = delete;  // NOLINT(bugprone-forwarding-reference-overload)
   
   T& get() const { return _ref; }
   operator T& () const { return _ref; }
