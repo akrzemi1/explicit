@@ -139,6 +139,8 @@ void test_only_when()
 
 typedef tagged_bool<class BoolA_tag> BoolA;
 typedef tagged_bool<class BoolB_tag> BoolB;
+typedef tagged_bool<class isTrue_tag, true> BoolT;
+typedef tagged_bool<class isFalse_tag, false> BoolF;
 
 void static_test_taged_bool_convertability()
 {
@@ -162,7 +164,7 @@ void demonstrate_tagged_bool()
 {
   constexpr BoolA a {true};
   constexpr BoolB b {false};
-  
+
   static_assert (a && !b, "failed tagged_bool");
   assert (a);
   static_assert (!b, "failed tagged_bool");
@@ -182,7 +184,13 @@ void demonstrate_tagged_bool()
   constexpr BoolA a1 {false};
   constexpr BoolA a2 = !a1;
   assert (a2);
+
+  constexpr BoolT isTrue;
+  constexpr BoolF isFalse;
+  static_assert(isTrue, "failed tagged_bool");
+  static_assert(!isFalse, "failed tagged_bool");
 }
+
 
 void test_tagged_bool()
 {

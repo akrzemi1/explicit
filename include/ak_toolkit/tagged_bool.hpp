@@ -11,17 +11,17 @@ namespace ak_toolkit {
 namespace xplicit {
 namespace tagged_bool_ns { // artificial namespace to prevent ADL into namespace xplicit
 
-template <typename Tag>
+template <typename Tag, bool default_value = false>
 class tagged_bool
 {
     bool value;
     
-    template <typename /*OtherTag*/>
+    template <typename /*OtherTag*/, bool>
         friend class tagged_bool;
     
 public:
   
-    constexpr explicit tagged_bool (bool v) : value {v} {}
+    constexpr explicit tagged_bool (bool v = default_value) : value {v} {}
     
     constexpr explicit tagged_bool (int) = delete;
     constexpr explicit tagged_bool (double) = delete;
