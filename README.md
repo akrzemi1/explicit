@@ -90,6 +90,13 @@ For more, [see here](doc/not_null.md).
 ## installation
 It is a C++11 header-only library.
 
+All library components are defined in namespace `ak_toolkit::xplicit`. However,
+including header `<ak_toolkit/namespace_xpl>` introduces a shorter alias `xpl`.
+Using `xpl` is shorter, but risks clashes in case a different library also
+uses short `xpl` for some other purpose. If that happens, you have to go with the
+longer but safer version.
+
+
 ## License
 Distributed under the [Boost Software License, Version 1.0](http://www.boost.org/LICENSE_1_0.txt).
 

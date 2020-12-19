@@ -3,6 +3,7 @@
 #include "ak_toolkit/tagged_bool.hpp"
 #include "ak_toolkit/not_null.hpp"
 #include "ak_toolkit/out_param.hpp"
+#include "ak_toolkit/namespace_xpl.hpp"
 #include <string>
 #include <cassert>
 
@@ -137,7 +138,7 @@ void test_only_when()
   static_test_only_when_convertible();
 }
 
-typedef tagged_bool<class BoolA_tag> BoolA;
+typedef xpl::tagged_bool<class BoolA_tag> BoolA; // using short namespace alias xpl
 typedef tagged_bool<class BoolB_tag> BoolB;
 
 void static_test_taged_bool_convertability()
