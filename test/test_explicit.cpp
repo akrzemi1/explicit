@@ -25,7 +25,7 @@ struct Processor
 
 void static_test_proxy_ref(){}
 
-# else 
+# else
 
 struct ProxyReference
 {
@@ -56,7 +56,7 @@ void static_rvalue_ref_conversions_fail()
   static_assert(!std::is_constructible<Processor, Big1, const Big2&>::value, "test failure");
   static_assert(!std::is_constructible<Processor, const Big1&, const Big2&&>::value, "test failure");
 }
-  
+
 void demonstrate_lvalue_ref()
 {
   const Big1 b1 {}; // just shows usage
@@ -97,7 +97,7 @@ void static_test_only_int_convertible()
   static_assert(std::is_constructible<Rational, int>::value, "failed only_int");
   static_assert(std::is_constructible<Rational, short>::value, "failed only_int");
   static_assert(std::is_constructible<Rational, SuperInt>::value, "failed only_int");
-  
+
   static_assert(!std::is_constructible<Rational, float>::value, "failed only_int");
   static_assert(!std::is_constructible<Rational, double>::value, "failed only_int");
   static_assert(!std::is_constructible<Rational, long double>::value, "failed only_int");
@@ -120,11 +120,11 @@ struct is_a_non_string : std::conditional<
 void static_test_only_when_convertible()
 {
   typedef only_when<filesystem_path, is_a_non_string> only_path;
-  
+
   static_assert(std::is_convertible<filesystem_path, only_path>::value, "test failure");
   static_assert(!std::is_convertible<std::string, only_path>::value, "test failure");
   static_assert(!std::is_convertible<const char*, only_path>::value, "test failure");
-  
+
   static_assert(std::is_constructible<filesystem_path, std::string>::value, "test failure");
   static_assert(std::is_constructible<filesystem_path, const char *>::value, "test failure");
   static_assert(!std::is_constructible<only_path, std::string>::value, "test failure");
@@ -146,9 +146,9 @@ void static_test_taged_bool_convertability()
   static_assert(!std::is_convertible<BoolA, bool>::value, "failed taged_bool");
   static_assert(!std::is_convertible<BoolA, BoolB>::value, "failed taged_bool");
   static_assert( std::is_convertible<BoolA, BoolA>::value, "failed taged_bool");
-  
+
   static_assert( std::is_constructible<bool, BoolA>::value, "failed taged_bool");
-  
+
   static_assert( std::is_constructible<BoolA, bool>::value, "failed taged_bool");
   static_assert( std::is_constructible<BoolA, BoolA>::value, "failed taged_bool");
   static_assert( std::is_constructible<BoolA, BoolB>::value, "failed taged_bool");
@@ -162,23 +162,23 @@ void demonstrate_tagged_bool()
 {
   constexpr BoolA a {true};
   constexpr BoolB b {false};
-  
+
   static_assert (a && !b, "failed tagged_bool");
   assert (a);
   static_assert (!b, "failed tagged_bool");
   static_assert (a == a, "failed tagged_bool");
   static_assert ((!b) == !b, "failed tagged_bool");
   static_assert (a || b, "failed tagged_bool");
-  
+
   if (a) assert (true);
-  else   assert (false); 
+  else   assert (false);
 
   constexpr BoolB ba {a};
   assert (ba);
   static_assert (ba && a, "failed tagged_bool");
   static_assert (ba == BoolB{a}, "failed tagged_bool");
-  static_assert (ba != b, "failed tagged_bool"); 
-    
+  static_assert (ba != b, "failed tagged_bool");
+
   constexpr BoolA a1 {false};
   constexpr BoolA a2 = !a1;
   assert (a2);
@@ -214,11 +214,25 @@ void assign(out_param<std::string&> obj, std::string const& value)
   obj.get() = value;
 }
 
+void assign_ptr(out_param<std::string*> obj, std::string const& value)
+{
+  if (obj.get())
+    *obj.get() = value;
+}
+
 void test_out_param()
 {
   std::string s;
   assign(out(s), "value");
   assert (s == "value");
+
+  std::string z;
+  assign_ptr(out(&z), "value");
+  assert(z == "value");
+
+  std::string * ptr = 0;
+  assign_ptr(out(ptr), "value");
+  // no effect, including no UB
 }
 
 int main()

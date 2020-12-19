@@ -23,3 +23,29 @@ assign(out(s), "text");
 ```
 
 This forces the function callers to be explicit about passing output arguments to it.
+
+
+## Handling pointers
+
+There is also a variant taking a pointer rather than reference:
+
+```c++
+#include <ak_toolbox/out_param.hpp>
+using namespace ak_toolkit::xplicit;
+
+void assign_ptr(out_param<std::string*> s, // < pointer output parameter
+            std::string const& v)
+{
+    if (s.get())
+        *s.get() = v;
+}
+
+int main()
+{
+    std::string s;
+    std::string* p = &s;
+    assign_ptr(out(p), "text");
+}
+```
+In this case the pointer itself is passed by value. This means you can assign to the object
+pointed to by the pointer, but you cannot change the address of the pointer. 
