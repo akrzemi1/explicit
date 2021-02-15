@@ -55,3 +55,10 @@ You declare and use these bool-types as follows:
 void set_status(EngineStarted started, CrewReady ready); // function declaration
 set_status(EngineStarted{true}, CrewReady{true});        // function call
 ```
+
+Depending on the name you choose for the boolean type it may suggest a convenient default value. E.g. in the above example 
+you may want the booleans to have `true` as their default values. This can be achieved with:
+```c++
+using EngineStarted = xplicit::tagged_bool<class EngineStartedTag, true>;
+set_status(EngineStarted{}, CrewReady{false});
+```
