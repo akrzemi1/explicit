@@ -174,6 +174,18 @@ void demonstrate_tagged_bool()
   if (a) assert (true);
   else   assert (false);
 
+  if (a == true) assert(true);
+  else   assert(false);
+
+  if (true == a) assert(true);
+  else   assert(false);
+
+  if (a != false) assert(true);
+  else   assert(false);
+
+  if (false != a) assert(true);
+  else   assert(false);
+
   constexpr BoolB ba {a};
   assert (ba);
   static_assert (ba && a, "failed tagged_bool");
