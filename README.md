@@ -23,8 +23,11 @@ For more, [see here](doc/out_param.md).
 An alternative to type `bool` in function arguments. It allows to associate a name with the boolean type. No nasty implicit converisons from/to `int`, `double`, or pointers. Different instantiations of `tagged_bool` are not interconvertible:
 
 ```c++
-using EngineStarted = tagged_bool<class EngineStartedTag>; // one boolean type
-using CrewReady     = tagged_bool<class CrewReadyTag>;     // another boolean type
+class EngineStartedTag_; // never defined
+class CrewReadyTag_;     // never defined
+
+using EngineStarted = tagged_bool<EngineStartedTag_>; // one boolean type
+using CrewReady     = tagged_bool<CrewReadyTag_>;     // another boolean type
 
 void set_status(EngineStarted started, CrewReady ready); // function declaration
 set_status(EngineStarted{true}, CrewReady{true});        // function invokation

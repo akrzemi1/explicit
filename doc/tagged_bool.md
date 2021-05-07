@@ -27,8 +27,11 @@ Using `tagged_bool` avoids all these problems. It allows you to easily build you
 #include <ak_toolbox/tagged_bool.hpp>
 namespace xplicit = ak_toolkit::xplicit;
 
-using EngineStarted = xplicit::tagged_bool<class EngineStartedTag>;
-using CrewReady     = xplicit::tagged_bool<class CrewReadyTag>;
+class EngineStartedTag_; // never defined
+class CrewReadyTag_;     // never defined
+
+using EngineStarted = xplicit::tagged_bool<EngineStartedTag_>;
+using CrewReady     = xplicit::tagged_bool<CrewReadyTag_>;
 ```
 
 This creates two boolean types: `EngineStarted` and `CrewReady`. They can be used as in boolean expressions
@@ -46,7 +49,7 @@ CrewReady     cr2 {es}          // ok    (explicit conversion)
 CrewReady     cr3 = es;         // error (implicit conversion)
 ```
 
-Types `EngineStartedTag` and `CrewReadyTag` guarantee that different instantiations of `tagged_bool` render different types.
+Types `EngineStartedTag_` and `CrewReadyTag_` guarantee that different instantiations of `tagged_bool` render different types.
 These tags do not have to be complete types.
 
 You declare and use these bool-types as follows:
@@ -55,3 +58,8 @@ You declare and use these bool-types as follows:
 void set_status(EngineStarted started, CrewReady ready); // function declaration
 set_status(EngineStarted{true}, CrewReady{true});        // function call
 ```
+
+Note that technically one could declare the tagged bool type and the tag class in a single declaration,
+using an [elaborated type specifier](https://en.cppreference.com/w/cpp/language/elaborated_type_specifier).
+It is not recommended however, due to the nasty behavior of this feature, which can result in two distinct 
+tag types actually become one. 
